@@ -28,8 +28,6 @@ Visual Studio Code를 사용하여 코드를 개발합니다. 앱의 코드 파�
 5. 
           `Labfiles/04-use-a-container` 폴더를 펼칩니다.
 
-C# 및 Python용 코드가 모두 제공되었습니다. 기본 설정 언어의 폴더를 확장합니다.
-
 ## Azure AI 서비스 리소스 프로비전
 
 구독에 아직 없는 경우 **Azure AI 서비스** 리소스를 프로비전해야 합니다.
