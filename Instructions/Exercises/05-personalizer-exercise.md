@@ -2,9 +2,7 @@
 lab:
   title: Visual Studio Code Notebooks와 함께 AI Personalizer를 사용하여 루프 시뮬레이션
 ---
-> **중요** 2023년 가을부터 새로운 Personalizer 리소스를 더 이상 만들 수 없습니다.
-
-> **참고** 이 연습을 완료하려면 [Azure 구독](https://azure.microsoft.com/free?azure-portal=true)이 필요합니다.
+> **중요** 2023년 가을부터 새로운 Personalizer 리소스를 더 이상 만들 수 없습니다. 기존 Personalizer 리소스가 있는 경우 참조용으로만 이 리포지토리를 사용합니다.
 
 이 연습에서는 Visual Studio Code의 Notebooks와 함께 Azure AI Personalizer를 사용하여 학습 루프를 시뮬레이션합니다.
 
