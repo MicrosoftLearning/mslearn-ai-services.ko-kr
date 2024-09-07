@@ -114,7 +114,7 @@ Azure AI 서비스 리소스에 대한 키 목록이 반환됩니다. 마지막�
 5. **+ 생성/가져오기**를 선택하고 다음 설정으로 새 비밀을 추가합니다.
     - **업로드 옵션**: 수동
     - **이름**: AI-Services-Key *(나중에 이 이름을 기준으로 비밀을 검색하는 코드를 실행할 것이므로 이 이름을 정확하게 사용해야 함)*
-    - **값**: *사용자의 **key1** Azure AI 서비스 키*
+    - **비밀 값**: *사용자의 **key1** Azure AI 서비스 키*
 6. **만들기**를 실행합니다.
 
 ### 서비스 주체 만들기
@@ -168,16 +168,16 @@ Azure AI 서비스 리소스에 대한 키 목록이 반환됩니다. 마지막�
 
     ```
     dotnet add package Azure.AI.TextAnalytics --version 5.3.0
-    dotnet add package Azure.Identity --version 1.5.0
-    dotnet add package Azure.Security.KeyVault.Secrets --version 4.2.0-beta.3
+    dotnet add package Azure.Identity --version 1.12.0
+    dotnet add package Azure.Security.KeyVault.Secrets --version 4.6.0
     ```
 
     **Python**
 
     ```
     pip install azure-ai-textanalytics==5.3.0
-    pip install azure-identity==1.5.0
-    pip install azure-keyvault-secrets==4.2.0
+    pip install azure-identity==1.17.1
+    pip install azure-keyvault-secrets==4.8.0
     ```
 
 3. **keyvault-client** 폴더의 콘텐츠를 확인하고 구성 설정을 위한 파일이 포함되어 있는지 확인합니다.
