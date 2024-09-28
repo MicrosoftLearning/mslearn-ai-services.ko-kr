@@ -44,13 +44,16 @@ C# 및 Python용 코드가 모두 제공되었습니다. 기본 설정 언어의
 
 ## 인증 키 관리
 
-Azure AI 서비스 리소스를 만들 때 두 개의 인증 키가 만들어졌습니다. 이러한 키는 Azure Portal에서 관리할 수도 있고 Azure CLI(명령줄 인터페이스)를 사용하여 관리할 수도 있습니다.
+Azure AI 서비스 리소스를 만들 때 두 개의 인증 키가 만들어졌습니다. 이러한 키는 Azure Portal에서 관리할 수도 있고 Azure CLI(명령줄 인터페이스)를 사용하여 관리할 수도 있습니다. 
 
-1. Azure Portal에서 Azure AI 서비스 리소스로 이동하여 해당 **키 및 엔드포인트** 페이지를 확인합니다. 이 페이지에는 리소스에 연결하여 직접 개발한 애플리케이션에서 해당 리소스를 사용하려면 필요한 정보가 포함되어 있습니다. 특히 다음에 대해 주의하세요.
+1. 인증 키 및 엔드포인트를 가져오는 방법 중 하나를 선택합니다. 
+
+    **Azure Portal 사용**: Azure Portal에서 Azure AI 서비스 리소스로 이동하여 해당 **키 및 엔드포인트** 페이지를 확인합니다. 이 페이지에는 리소스에 연결하여 직접 개발한 애플리케이션에서 해당 리소스를 사용하려면 필요한 정보가 포함되어 있습니다. 특히 다음에 대해 주의하세요.
     - 클라이언트 애플리케이션이 요청을 보낼 수 있는 HTTP *엔드포인트*입니다.
     - 인증에 사용할 수 있는 두 개의 *키*(클라이언트 애플리케이션은 두 키 중 하나를 사용할 수 있습니다. 일반적으로는 개발과 프로덕션용으로 키를 하나씩 사용합니다. 개발자가 작업을 완료하고 나면 리소스에 계속 액세스할 수 없도록 개발 키를 쉽게 다시 생성할 수 있습니다.)
     - 리소스가 호스트되는 *위치*입니다. 일부 API(모든 API는 아님)에 요청을 보내려면 이 위치가 필요합니다.
-2. 이제 다음 명령을 사용하여 Azure AI 서비스 키 목록을 가져올 수 있습니다. 여기서 *&lt;resourceName&gt;* 을 Azure AI 서비스 리소스의 이름으로 바꾸고, *&lt;resourceGroup&gt;* 을 이를 만든 리소스 그룹의 이름으로 바꿉니다.
+
+    **명령줄 사용**: 또는 다음 명령을 사용하여 Azure AI 서비스 키 목록을 가져올 수 있습니다. Visual Studio Code에서 새 터미널을 엽니다. 그런 후에 다음 명령에 붙여넣고, *&lt;resourceName&gt;* 을 Azure AI 서비스 리소스 이름으로, *&lt;resourceGroup&gt;* 을 만든 리소스 그룹 이름으로 바꿉니다.
 
     ```
     az cognitiveservices account keys list --name <resourceName> --resource-group <resourceGroup>
@@ -58,15 +61,15 @@ Azure AI 서비스 리소스를 만들 때 두 개의 인증 키가 만들어졌
 
     이 명령은 Azure AI 서비스 리소스에 대한 키 목록을 반환합니다. **key1** 및 **key2**라는 두 개의 키가 있습니다.
 
-    > **팁**: 아직 Azure CLI를 인증하지 않은 경우 `az login`을 실행하고 계정에 로그인합니다.
+    > **팁**: 아직 Azure CLI를 인증하지 않은 경우 먼저 `az login`을 실행하고 계정에 로그인합니다.
 
-3. Azure AI 서비스를 테스트하려면 HTTP 요청용 명령줄 도구인 **curl**을 사용할 수 있습니다. **02-ai-services-security** 폴더에서 **rest-test.cmd**를 열고 여기에 포함된 **curl** 명령을 편집합니다(아래 참조). 여기서 Azure AI 서비스 리소스에서 Analyze Text API를 사용하려면 *&lt;yourEndpoint&gt;* 및 *&lt;yourKey&gt;* 를 엔드포인트 URI 및 **Key1** 키로 바꿉니다.
+2. Azure AI 서비스를 테스트하려면 HTTP 요청용 명령줄 도구인 **curl**을 사용할 수 있습니다. **02-ai-services-security** 폴더에서 **rest-test.cmd**를 열고 여기에 포함된 **curl** 명령을 편집합니다(아래 참조). 여기서 Azure AI 서비스 리소스에서 Analyze Text API를 사용하려면 *&lt;yourEndpoint&gt;* 및 *&lt;yourKey&gt;* 를 엔드포인트 URI 및 **Key1** 키로 바꿉니다.
 
     ```bash
-    curl -X POST "<yourEndpoint>/language/:analyze-text?api-version=2023-04-01" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: 81468b6728294aab99c489664a818197" --data-ascii "{'analysisInput':{'documents':[{'id':1,'text':'hello'}]}, 'kind': 'LanguageDetection'}"
+    curl -X POST "<yourEndpoint>/language/:analyze-text?api-version=2023-04-01" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: <your-key>" --data-ascii "{'analysisInput':{'documents':[{'id':1,'text':'hello'}]}, 'kind': 'LanguageDetection'}"
     ```
 
-4. 변경 내용을 저장한 후 다음 명령을 실행합니다.
+3. 변경 내용을 저장합니다. 터미널에서 "02-ai-services-security" 폴더로 이동합니다. (**참고**: 탐색기에서 '02-ai-services-security' 폴더를 마우스 오른쪽 버튼으로 클릭하고 *통합 터미널에서 열기*를 선택하면 됩니다.) 그런 후 다음 명령을 실행합니다.
 
     ```
     ./rest-test.cmd
@@ -74,7 +77,7 @@ Azure AI 서비스 리소스를 만들 때 두 개의 인증 키가 만들어졌
 
 이 명령은 입력 데이터에서 감지된 언어(영어) 관련 정보가 포함된 JSON 문서를 반환합니다.
 
-5. 키가 손상되었거나 키를 소유한 개발자가 더 이상 리소스에 액세스할 필요가 없는 경우 Azure Portal에서 Azure CLI를 사용하여 키를 다시 생성할 수 있습니다. 다음 명령을 실행하여 **key1** 키를 다시 생성합니다(*&lt;resourceName&gt;* 및 *&lt;resourceGroup&gt;* 은 리소스 관련 정보로 바꿔야 함).
+4. 키가 손상되었거나 키를 소유한 개발자가 더 이상 리소스에 액세스할 필요가 없는 경우 Azure Portal에서 Azure CLI를 사용하여 키를 다시 생성할 수 있습니다. 다음 명령을 실행하여 **key1** 키를 다시 생성합니다(*&lt;resourceName&gt;* 및 *&lt;resourceGroup&gt;* 은 리소스 관련 정보로 바꿔야 함).
 
     ```
     az cognitiveservices account keys regenerate --name <resourceName> --resource-group <resourceGroup> --key-name key1
@@ -82,8 +85,8 @@ Azure AI 서비스 리소스를 만들 때 두 개의 인증 키가 만들어졌
 
 Azure AI 서비스 리소스에 대한 키 목록이 반환됩니다. 마지막으로 검색한 이후 **key1**이 변경되었습니다.
 
-6. 이전 키를 사용하여 **rest-test** 명령을 다시 실행하고(키보드의 **^** 화살표를 사용하여 이전 명령을 차례로 다시 실행할 수 있음) 이번에는 명령 실행이 실패함을 확인합니다.
-7. **rest-test.cmd**의 *curl* 명령을 편집하여 키를 새 **key1** 값으로 바꾸고 변경 내용을 저장합니다. 그런 다음 **rest-test** 명령을 다시 실행하여 정상적으로 실행되는지 확인합니다.
+5. 이전 키를 사용하여 **rest-test** 명령을 다시 실행하고(키보드의 **^** 화살표를 사용하여 이전 명령을 차례로 다시 실행할 수 있음) 이번에는 명령 실행이 실패함을 확인합니다.
+6. **rest-test.cmd**의 *curl* 명령을 편집하여 키를 새 **key1** 값으로 바꾸고 변경 내용을 저장합니다. 그런 다음 **rest-test** 명령을 다시 실행하여 정상적으로 실행되는지 확인합니다.
 
 > **팁**: 이 연습에서는 **--resource-group**과 같은 Azure CLI 매개 변수의 전체 이름을 사용했습니다.  **-g** 등의 더 짧은 이름을 사용하면 명령을 더 간단하게 작성할 수도 있습니다(하지만 명령을 이해하기는 좀 더 어려울 수도 있음).  [Azure AI 서비스 CLI 명령 참조](https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest)에 각 Azure AI 서비스 CLI 명령에 대한 매개 변수 옵션이 나와 있습니다.
 
