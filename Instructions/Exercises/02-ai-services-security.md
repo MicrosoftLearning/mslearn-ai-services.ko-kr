@@ -98,6 +98,9 @@ Azure AI 서비스 리소스에 대한 키 목록이 반환됩니다. 마지막�
 
 먼저 키 자격 증명 모음을 만들고 Azure AI 서비스 키에 대한 *비밀*을 추가해야 합니다.
 
+키 자격 증명 모음을 만들고, 비밀을 추가하는 방법 중 하나를 선택합니다.
+
+#### Azure Portal 사용
 1. Azure AI 서비스 리소스의 **key1** 값을 기록해 둡니다(또는 클립보드에 복사).
 2. Azure Portal의 **홈** 페이지에서 **&#65291;리소스 만들기** 단추를 선택하고 *Key Vault*를 검색한 후 다음 설정으로 **Key Vault** 리소스를 만듭니다.
 
@@ -119,6 +122,33 @@ Azure AI 서비스 리소스에 대한 키 목록이 반환됩니다. 마지막�
     - **이름**: AI-Services-Key *(나중에 이 이름을 기준으로 비밀을 검색하는 코드를 실행할 것이므로 이 이름을 정확하게 사용해야 함)*
     - **비밀 값**: *사용자의 **key1** Azure AI 서비스 키*
 6. **만들기**를 실행합니다.
+
+#### Azure CLI 사용
+또는 Azure CLI를 사용하여 키 자격 증명 모음을 만들고, 비밀을 추가할 수 있습니다.
+
+1. Visual Studio Code에서 터미널을 엽니다.
+2. 다음 명령을 실행하여 원하는 Key Vault를 만들고 `<keyVaultName>`, `<resourceGroup>`, `<location>`을 원하는 Key Vault 이름, 리소스 그룹 이름, Azure 지역(예: `eastus`)으로 대체합니다.
+
+    ```
+    az keyvault create \
+      --name <key-vault-name> \
+      --resource-group <resource-group-name> \
+      --location <region> \
+      --sku standard \
+      --enable-rbac-authorization false
+    ```
+    `--enable-rbac-authorization false` 플래그는 권한 모델이 “자격 증명 모음 액세스 정책(기본값)”으로 설정되어 있는지 확인합니다.
+
+3. Key Vault에서 Azure AI 서비스 키를 비밀로 추가합니다. Key Vault 이름을 `<keyVaultName>`으로 바꾸고 `<your-key1-value>`를 Azure AI 서비스 key1의 값으로 바꿉니다.
+
+    ```
+    az keyvault secret set \
+    --vault-name <key-vault-name> \
+    --name AI-Services-Key \
+    --value <your-azure-ai-services-key>
+    ```
+
+이제 Key Vault를 만들고 Azure AI 서비스 키를 `AI-Services-Key`라는 비밀로 저장했습니다.
 
 ### 서비스 주체 만들기
 
