@@ -1,3 +1,5 @@
+**⚠️ This GitHub repo will retire on 30th December 2025.**
+
 # Azure에서 AI 솔루션 개발
 
 > **참고**: 이 리포지토리는 보관 중이며 더 이상 유지 관리되지 않습니다. [생성형 AI 앱](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/) 학습 경로, [관련 랩 리포지토리](https://github.com/MicrosoftLearning/mslearn-ai-studio), [Azure AI 파운드리 설명서](https://learn.microsoft.com/en-us/azure/ai-foundry/)를 방문하세요.
